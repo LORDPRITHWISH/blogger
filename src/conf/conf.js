@@ -5,8 +5,6 @@ const conf = {
     collectionId: String(process.env.COLLECTION_ID),
     bucketId: String(process.env.BUCKET_ID),
 
-
-
 }
 
 export default conf;
