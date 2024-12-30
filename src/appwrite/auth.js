@@ -34,17 +34,17 @@ export class Auth {
         // return result;
         result.then(function (response) {
             console.log(response); // Success
-            return result
+            return response
         }, (error) => {
             console.log("problem at get :: ", error); // Failure
         });
     };
 
-    async logout() { 
+    async logout() {
         const res = await this.account.deleteSession('current');
 
         res.then(function (response) {
-            console.log(response,"loged out"); // Success
+            console.log(response, "loged out"); // Success
         }, (error) => {
             console.log("problem at logout :: ", error); // Failure
         });
