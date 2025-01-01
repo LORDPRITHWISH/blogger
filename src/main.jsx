@@ -10,7 +10,7 @@ import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Post from "./pages/Post.jsx";
-import EditPosts from "./pages/EditPosts.jsx";
+import EditPosts from "./pages/EditPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/edi/:slug",
+        path: "/edit_po/:slug",
         element: (
           <Authenticator authentication={true}>
             <EditPosts />
