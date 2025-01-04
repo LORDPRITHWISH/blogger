@@ -1,6 +1,6 @@
 import React from "react";
 
-const Selector = ({ labtxt, option = [], className = "", ...props }, ref) => {
+const Select = ({ labtxt, option = [], className = "", ...props }, ref) => {
   let id = React.useId();
   return (
     <div>
@@ -20,4 +20,4 @@ const Selector = ({ labtxt, option = [], className = "", ...props }, ref) => {
   );
 };
 
-export default React.forwardRef(Selector);
+export default React.forwardRef(Select);
