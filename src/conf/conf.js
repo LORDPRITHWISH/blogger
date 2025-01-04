@@ -1,9 +1,9 @@
 const conf = {
-    appwriteUrl: String(process.env.APPWRITE_ENDPOINT),
-    projectId: String(process.env.PROJ_ID),
-    databaseId: String(process.env.DATA_BASE_ID),
-    collectionId: String(process.env.COLLECTION_ID),
-    bucketId: String(process.env.BUCKET_ID),
+    appwriteUrl: String(import.meta.env.APPWRITE_ENDPOINT),
+    projectId: String(import.meta.env.PROJ_ID),
+    databaseId: String(import.meta.env.DATA_BASE_ID),
+    collectionId: String(import.meta.env.COLLECTION_ID),
+    bucketId: String(import.meta.env.BUCKET_ID),
 
 }
 

@@ -45,8 +45,10 @@ export class Auth {
 
         res.then(function (response) {
             console.log(response, "loged out"); // Success
+            return response
         }, (error) => {
             console.log("problem at logout :: ", error); // Failure
+            return error
         });
     };
 
