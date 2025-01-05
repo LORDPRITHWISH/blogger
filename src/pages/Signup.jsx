@@ -1,8 +1,11 @@
 import React from 'react'
+import SignupEle from '../components/SignupEle'
 
 const Signup = () => {
   return (
-    <div>Signup</div>
+    <div>
+      <SignupEle />
+    </div>
   )
 }
 

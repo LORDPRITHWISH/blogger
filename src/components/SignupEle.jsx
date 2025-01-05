@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { login } from "../store/authSlice";
 import Input from "./Input";
+import service from "../appwrite/config";
 
-const Signup = () => {
+const SignupEle = () => {
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
   const dispatch = useDispatch();
@@ -35,9 +36,10 @@ const Signup = () => {
         <Input type="text" label="Enter Name :" name="name" placeholder="Name" classname=" mb-2" {...register("username", { required: true })} />
         <Input type="email" label="Enter Email :" name="email" placeholder="Email" classname=" mb-2" {...register("email", { required: true })} />
         <Input type="password" label="Enter Password :" name="password" placeholder="Password" classname=" mb-2" {...register("password", { required: true })} />
+        <button type="submit" className="bg-blue-600 rounded-lg p-2">Signup</button>
       </form>
     </div>
   );
 };
 
-export default Signup;
+export default SignupEle;

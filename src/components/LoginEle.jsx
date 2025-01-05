@@ -6,7 +6,7 @@ import { login } from "../store/authSlice";
 import Input from "./Input";
 import service from "../appwrite/config";
 
-const Login = () => {
+const LoginEle = () => {
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
   const dispatch = useDispatch();
@@ -41,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginEle;

@@ -1,7 +1,30 @@
-// import React from 'react'
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import Container from "../components/container/Container";
+import PostForm from "../components/postForm/PostForm";
+import service from "../appwrite/config";
 
 const EditPost = () => {
-  return <div>EditPost</div>;
+  const [post, setPost] = useState(null);
+  const { slug } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    service.getPost(slug).then((gotpost) => {
+      if (gotpost) {
+        setPost(gotpost);
+      } else {
+        navigate("/");
+      }
+    });
+  }, [slug, navigate]);
+
+
+  return <div>
+    <Container>
+      <PostForm post={post} />
+    </Container>
+  </div>;
 };
 
 export default EditPost;
