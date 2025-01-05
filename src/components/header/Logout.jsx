@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch } from "react-redux";
 import { Auth } from "../../appwrite/auth";
 
@@ -17,3 +16,5 @@ const Logout = () => {
 };
 
 export default Logout;
+
+

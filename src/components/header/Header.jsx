@@ -49,7 +49,7 @@ const Header = () => {
       <Container>
         <nav className="flex justify-between items-center py-1">
           <Link to="/">
-            <Logo />
+            <Logo className="h-14" />
           </Link>
           <ul className="flex space-x-5">
             {navitems.map((item, index) => {
@@ -65,16 +65,17 @@ const Header = () => {
             })}
           </ul>
           <ul className="flex space-x-5">
-            {authStatus ? 
-                <Logout />
-             :
-            regisbutton.map((item, index) => (
-              <li key={index}>
-                <button className="bg-indigo-600 text-slate-100 px-3 py-1 rounded-md" onClick={() => navigator(item.slug)}>
-                  {item.name}
-                </button>
-              </li>
-            ))}
+            {authStatus ? (
+              <Logout />
+            ) : (
+              regisbutton.map((item, index) => (
+                <li key={index}>
+                  <button className="bg-indigo-600 text-slate-100 px-3 py-1 rounded-md" onClick={() => navigator(item.slug)}>
+                    {item.name}
+                  </button>
+                </li>
+              ))
+            )}
           </ul>
         </nav>
       </Container>

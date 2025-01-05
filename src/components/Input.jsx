@@ -1,15 +1,15 @@
 import React from "react";
 
-const Input = React.forwardRef(({ intxt = "enter", labtxt, type = "text", classes = "", ...props }, ref) => {
+const Input = React.forwardRef(({ intxt = "enter", label, type = "text", classname = "", ...props }, ref) => {
   let id = React.useId();
   return (
     <div>
-      {labtxt && (
+      {label && (
         <label htmlFor={id} className="border-l-indigo-700">
-          {labtxt}
+          {label}
         </label>
       )}
-      <input id={id} type={type} placeholder={intxt} className={`border-2 border-indigo-500 ${classes}`} {...props} ref={ref} />
+      <input id={id} type={type} placeholder={intxt} className={`border-2 border-indigo-500 ${classname}`} {...props} ref={ref} />
     </div>
   );
 });
