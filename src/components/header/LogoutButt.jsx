@@ -1,11 +1,11 @@
 import { useDispatch } from "react-redux";
-import { Auth } from "../../appwrite/auth";
+import auther from "../../appwrite/auth";
 
-const Logout = () => {
+const LogoutButt = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    Auth.logout().then(() => {
+    auther.logout().then(() => {
       dispatch({ type: "LOGOUT" });
     }),
       (error) => {
@@ -15,6 +15,4 @@ const Logout = () => {
   return <button onClick={handleLogout}>Logout</button>;
 };
 
-export default Logout;
-
-
+export default LogoutButt;

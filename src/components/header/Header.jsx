@@ -3,7 +3,7 @@ import Container from "../container/Container";
 import { useSelector } from "react-redux";
 import Logo from "../Logo";
 import { Link, NavLink, useNavigate } from "react-router";
-import Logout from "./Logout";
+import LogoutButt from "./LogoutButt";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);
@@ -49,7 +49,7 @@ const Header = () => {
       <Container>
         <nav className="flex justify-between items-center py-1">
           <Link to="/">
-            <Logo className="h-14" />
+            <Logo size={16} className=" rounded-xl" />
           </Link>
           <ul className="flex space-x-5">
             {navitems.map((item, index) => {
@@ -66,7 +66,7 @@ const Header = () => {
           </ul>
           <ul className="flex space-x-5">
             {authStatus ? (
-              <Logout />
+              <LogoutButt />
             ) : (
               regisbutton.map((item, index) => (
                 <li key={index}>

@@ -1,15 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Logo = ({ className, padd = 'p-1' }) => {
+const Logo = ({ size = 14, className, padd = "p-1" }) => {
+  let imsiz = `h-14`;
+  // if (size) imsiz = `h-${size}`;
+
   return (
-    <div className={`${padd} bg-zinc-100`}>
-      <img className={className} src="src/assets/logo.png" />
+    <div className={`${padd} ${className} bg-zinc-900`}>
+      <img className={` ${imsiz} ${className}`} src="src/assets/logo.png" />
     </div>
   );
-};
-Logo.propTypes = {
-  size: PropTypes.string.isRequired,
 };
 
 export default Logo;

@@ -11,6 +11,7 @@ import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Post from "./pages/Post.jsx";
 import EditPosts from "./pages/EditPost.jsx";
+import Logout from "./pages/Logout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,12 @@ const router = createBrowserRouter([
           <Authenticator authentication={true}>
             <Post />
           </Authenticator>
+        ),
+      },
+      {
+        path: "/logout",
+        element: (
+            <Logout />
         ),
       },
       {
