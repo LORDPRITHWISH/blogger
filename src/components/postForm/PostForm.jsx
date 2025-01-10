@@ -23,6 +23,7 @@ const PostForm = ({ post }) => {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
+    console.log("Data:", data);
     if (post) {
       const file = data.image[0] ? data.image[0] : null;
       if (file) {
@@ -37,9 +38,11 @@ const PostForm = ({ post }) => {
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
-    } else {
+    } 
+    else {
       const file = await service.uploadFile(data.image[0]);
 
+      console.log("File:", file);
       if (file) {
         const fileID = file.$id;
         data.featuredImage = fileID;
@@ -72,27 +75,27 @@ const PostForm = ({ post }) => {
   return (
     <form onSubmit={handleSubmit(submit)} className="w-full flex flex-wrap">
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <Input label="title" placeholder="title" className="mb-4" {...register("title", { required: true })} />
+        <Input label="title" placeholder="title" className="mb-4 bg-blue-950" {...register("title", { required: true })} />
         <Input
           label="slug"
           placeholder="slug"
-          className="mb-4"
+          className="mb-4 bg-blue-950"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.target.value), { shouldValidate: true });
           }}
         />
-        <RTE label={"Content: "} name={"content"} controll={control} defaultvalue={getValues("content")} />
+        <RTE label={"Content: "} name={"content"} control={control} defaultvalue={getValues("content")} />
       </div>
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
         <Input label="Featured Image" type="file" className="mb-4" accept="image/png, image/jpg, image/jpeg" {...register("image", { required: !post })} />
         {post && (
-          <div className="mb-4">
-            <img src={service.getPreview(post.featuredImage)} alt={post.title} className="w-full" />
+          <div className="mb-4 bg-blue-950">
+            <img src={service.getPreview(post.featuredImage)} alt={post.title} className="w-full bg-blue-950" />
           </div>
         )}
-        <Select option={["active", "inactive"]} labtxt="Status" className="mb-4" {...register("status", { required: true })} />
-        <Button type="submit" colour={post ? "bg-blue" : "bg-green"} className="text-white font-bold py-2 px-4 rounded">
+        <Select option={["active", "inactive"]} labtxt="Status" className="mb-4 bg-blue-950" {...register("status", { required: true })} />
+        <Button type="submit" colour={post ? "bg-blue" : "bg-green"} className="text-white font-bold py-2 px-4 rounded-2xl border-gray-400 border-2">
           {post ? "Update" : "Create"}
         </Button>
       </div>

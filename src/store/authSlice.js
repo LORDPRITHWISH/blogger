@@ -19,6 +19,7 @@ const authSlice = createSlice({
     },
     authStatus: (state, action) => {
       console.log(action.payload);
+      state.status = true;
       state.status = action.payload.status;
     },
   },

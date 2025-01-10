@@ -20,25 +20,30 @@ const SignupEle = () => {
   // console.log(auther);
   const Create = async (data) => {
     setError(null);
+
     try {
-      console.log(data);
-      const userData = await auther.createAccount(data);
-      console.log("userData", userData);
-      if (userData) {
-        const currUderDATA = await auther.getAccount();
+        console.log("Input Data:", data);
 
-        console.log("currUderDATA", currUderDATA);
-        if (currUderDATA) {
-          dispatch(login({ userData }));
+        // Create a new account
+        const userData = await auther.createAccount(data);
+        console.log("User Data:", userData);
 
-          navigate("/");
+        // If account creation is successful, fetch current user data
+        if (userData) {
+            const currUserData = await auther.getAccount();
+            console.log("Current User Data:", currUserData);
+
+            // Dispatch login action if user data is available
+            if (currUserData) {
+                dispatch(login({ userData: currUserData })); // Pass the correct user data
+                navigate("/"); // Navigate to home page
+            }
         }
-      }
     } catch (err) {
-      setError(err.message);
-      console.log(err);
+        setError(err.message); // Set error for UI
+        console.error("Error in Create function:", err);
     }
-  };
+};
 
   return (
     <div>
@@ -56,3 +61,4 @@ const SignupEle = () => {
 };
 
 export default SignupEle;
+

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { login } from "../store/authSlice";
 import Input from "./Input";
-import service from "../appwrite/config";
+import auther from "../appwrite/auth";
 
 const LoginEle = () => {
   const navigate = useNavigate();
@@ -16,9 +16,9 @@ const LoginEle = () => {
   const logging = async (data) => {
     setError(null);
     try {
-      const session = await service.login(data);
+      const session = await auther.login(data);
       if (session) {
-        const userData = await service.getAccount();
+        const userData = await auther.getAccount();
         if (userData) {
           dispatch(login({ userData }));
           navigate("/");
@@ -35,11 +35,12 @@ const LoginEle = () => {
       <form onSubmit={handleSubmit(logging)}>
         <Input type="email" label="Enter Email :" name="email" placeholder="Email" classname=" mb-2" {...register("email", { required: true })} />
         <Input type="password" label="Enter Password :" name="password" placeholder="Password" classname=" mb-2" {...register("password", { required: true })} />
-        <button type="submit">Login</button>
+        <button className="bg-orange-700 rounded-lg p-1 text-xl font-extrabold" type="submit">Login</button>
       </form>
     </div>
   );
 };
 
 export default LoginEle;
+
 

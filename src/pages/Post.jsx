@@ -11,7 +11,9 @@ const Post = () => {
   const navigate = useNavigate();
 
   const userdata = useSelector((state) => state.auth.userData);
-  const isAuther = post?.userId === userdata.$id;
+  // console.log('data=> ',userdata.$id);
+  const isAuther = React.useRef(post?.UserId === userdata?.$id);
+  // const isAuther = false;
 
   const deleatePost = () => {
     service.deletePost(post.$id).then((status) => {
@@ -23,11 +25,19 @@ const Post = () => {
   };
 
   React.useEffect(() => {
+    isAuther.current = post?.UserId === userdata.$id;
+    // console.log(isAuther);
+    console.log(`${isAuther},${post?.UserId}, ${userdata?.$id}`);
+  }, [post, userdata]);
+
+  React.useEffect(() => {
     service.getPost(slug).then((gotpost) => {
       if (gotpost) {
         setPost(gotpost);
       } else {
         navigate("/");
+        // console.log("Post not found");
+        // console.log(slug)
       }
     });
   }, [slug, navigate]);
@@ -36,8 +46,8 @@ const Post = () => {
     <div>
       <Container>
         <div className="flex justify-between items-center">
-          <img src={service.getPreview(post.featuredImage)} alt={post.title} className="w-1/2 rounded-xl" />
-          {isAuther && (
+          <img src={service.getPreview(post.logo)} alt={post.title} className="w-1/2 rounded-xl" />
+          {isAuther.current && (
             <div>
               <button onClick={deleatePost} className="bg-red-500 text-white px-3 py-1 rounded-md">
                 Delete
@@ -45,13 +55,12 @@ const Post = () => {
               <button onClick={() => navigate(`/edit/${post.$id}`)} className="bg-blue-500 text-white px-3 py-1 rounded-md">
                 Edit
               </button>
-            </div>)}
+            </div>
+          )}
         </div>
         <div className="w-full mb-2">
           <h1 className="text-2xl font-bold">{post.title}</h1>
-          <div className="brouwer-css">
-            {parse(post.content)}
-          </div>
+          <div className="brouwer-css">{parse(post.content)}</div>
         </div>
       </Container>
     </div>

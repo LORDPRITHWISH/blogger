@@ -9,7 +9,7 @@ const AllPost = () => {
 
   useEffect(() => {
     service
-      .getAllPosts()
+      .getPosts()
       .then((posts) => {
         if (posts) {
           console.log(posts);
@@ -26,11 +26,11 @@ const AllPost = () => {
     <div>
       {error && <p>{error}</p>}
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-7 ">
           {posts &&
             posts.length > 0 &&
             posts.map((post) => (
-              <div key={post.$id} className="bg-white rounded-md shadow-md p-4">
+              <div key={post.$id} className="bg-slate-900 rounded-md shadow-md p-4">
                 <Postcard {...post} />
               </div>
             ))}

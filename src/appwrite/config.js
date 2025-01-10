@@ -9,43 +9,43 @@ class Service {
     }
 
     async getPost(slug) {
-        let result = this.databases.getDocument(conf.databaseId, conf.collectionId, slug)
-
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            return await this.databases.getDocument(conf.databaseId, conf.collectionId, slug);
+        }
+        catch (error) {
             console.log("problem at getPost :: ", error)
-        })
+        }
     }
 
     async getPosts(queries = [Query.equal('status', 'active')]) {
-        let result = this.databases.listDocuments(conf.databaseId, conf.collectionId, queries)
-
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            return await this.databases.listDocuments(conf.databaseId, conf.collectionId, queries);
+        }
+        catch (error) {
             console.log("problem at getPosts :: ", error)
-        })
+        }
+
     }
 
-    async createPost({ title, content, status = 'active', slug, logo, userId }) {
+    async createPost({ title, content, status = 'active', slug, featuredImage = '0_0', userId }) {
 
-        let result = this.databases.createDocument(conf.databaseId, conf.collectionId, slug, {
-            title,
-            content,
-            logo,
-            userId,
-            status,
-        })
+        // console.log(":: createPost ::\n ", '\ntitle:', title, '\ncontent:', content, '\nstatus:', status, '\nslug:', slug, '\nlogo:', logo, '\nuserId:', userId)
 
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            let result = await this.databases.createDocument(conf.databaseId, conf.collectionId, slug, {
+                title,
+                content,
+                logo: featuredImage,
+                UserId: userId.toString(),
+                status,
+
+            })
+            return result;
+        }
+        catch (error) {
             console.log("problem at createPost :: ", error)
-        })
+        }
+
     }
 
     async updatePost(slug, { title, content, status = 'active', logo }) {
@@ -76,14 +76,12 @@ class Service {
     }
 
     async uploadFile(file) {
-        let result = this.bucket.createFile(conf.bucketId, ID.unique(), file)
-
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            return await this.bucket.createFile(conf.bucketId, ID.unique(), file);
+        }
+        catch (error) {
             console.log("problem at uploadFile :: ", error)
-        })
+        }
     }
 
     async deleteFile(fileId) {
@@ -97,9 +95,11 @@ class Service {
         })
     }
 
-    async getPreview(fileId) {
+    getPreview(fileId) {
+        // console.log('-->',fileId)
         try {
-            return this.bucket.getFilePreview(conf.bucketId, fileId);
+            let val = this.bucket.getFilePreview(conf.bucketId, fileId);
+            return val;
         }
         catch (error) {
             console.log("problem at getPreview :: ", error)

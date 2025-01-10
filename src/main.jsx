@@ -12,6 +12,10 @@ import Signup from "./pages/Signup.jsx";
 import Post from "./pages/Post.jsx";
 import EditPosts from "./pages/EditPost.jsx";
 import Logout from "./pages/Logout.jsx";
+import AddPost from "./pages/AddPost.jsx";
+import Profile from "./pages/Profile.jsx";
+import AllPost from "./pages/AllPost.jsx";
+import EditPost from "./pages/EditPost.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,18 +43,16 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/all_post",
+        path: "/posts",
         element: (
           <Authenticator authentication={true}>
-            <Post />
+            <AllPost />
           </Authenticator>
         ),
       },
       {
         path: "/logout",
-        element: (
-            <Logout />
-        ),
+        element: <Logout />,
       },
       {
         path: "/edit_po/:slug",
@@ -65,6 +67,38 @@ const router = createBrowserRouter([
         element: (
           <Authenticator authentication={true}>
             <Post />
+          </Authenticator>
+        ),
+      },
+      {
+        path: "/post",
+        element: (
+          <Authenticator authentication={true}>
+            <AllPost />
+          </Authenticator>
+        ),
+      },
+      {
+        path: "/create-post",
+        element: (
+          <Authenticator authentication={true}>
+            <AddPost />
+          </Authenticator>
+        ),
+      },
+      {
+        path: "/edit/:slug",
+        element: (
+          <Authenticator authentication={true}>
+            <EditPost />
+          </Authenticator>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <Authenticator authentication={true}>
+            <Profile />
           </Authenticator>
         ),
       },
