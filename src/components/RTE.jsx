@@ -23,6 +23,10 @@ const RTE = ({ name, control, label, defaultvalue = "" }) => {
                 branding: false,
                 height: 500,
                 menubar: true,
+                // content_css: "tinymce-5-dark",
+                selector: "textarea", // change this value according to your HTML
+                skin: "oxide-dark",
+                content_css: "tinymce-5-dark",
                 plugins: [
                   "advlist",
                   "autolink",

@@ -15,7 +15,7 @@ const LogoutButt = () => {
         console.log(error);
       };
   };
-  return <button onClick={handleLogout}>Logout</button>;
+  return <button className="bg-zinc-800 p-2 rounded-xl" onClick={handleLogout}>Logout</button>;
 };
 
 export default LogoutButt;

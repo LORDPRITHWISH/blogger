@@ -27,7 +27,7 @@ const Post = () => {
   React.useEffect(() => {
     isAuther.current = post?.UserId === userdata.$id;
     // console.log(isAuther);
-    console.log(`${isAuther},${post?.UserId}, ${userdata?.$id}`);
+    // console.log(`${isAuther},${post?.UserId}, ${userdata?.$id}`);
   }, [post, userdata]);
 
   React.useEffect(() => {
@@ -36,8 +36,7 @@ const Post = () => {
         setPost(gotpost);
       } else {
         navigate("/");
-        // console.log("Post not found");
-        // console.log(slug)
+        
       }
     });
   }, [slug, navigate]);
@@ -52,7 +51,7 @@ const Post = () => {
               <button onClick={deleatePost} className="bg-red-500 text-white px-3 py-1 rounded-md">
                 Delete
               </button>
-              <button onClick={() => navigate(`/edit/${post.$id}`)} className="bg-blue-500 text-white px-3 py-1 rounded-md">
+              <button onClick={() => navigate(`/edit_po/${post.$id}`)} className="bg-blue-500 text-white px-3 py-1 rounded-md">
                 Edit
               </button>
             </div>

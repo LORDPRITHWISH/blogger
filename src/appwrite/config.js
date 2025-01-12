@@ -49,30 +49,28 @@ class Service {
     }
 
     async updatePost(slug, { title, content, status = 'active', logo }) {
-        let result = this.databases.updateDocument(conf.databaseId, conf.collectionId, slug, {
-            title,
-            content,
-            logo,
-            status
-        })
-
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            let result = await this.databases.updateDocument(conf.databaseId, conf.collectionId, slug, {
+                title,
+                content,
+                logo,
+                status
+            })
+            return result;
+        }
+        catch (error) {
             console.log("problem at updatePost :: ", error)
-        })
+        }
     }
 
     async deletePost(slug) {
-        let result = this.databases.deleteDocument(conf.databaseId, conf.collectionId, slug)
-
-        result.then(function (response) {
-            console.log(response)
-            // return response
-        }, (error) => {
+        try {
+            let result = await this.databases.deleteDocument(conf.databaseId, conf.collectionId, slug)
+            return result;
+        }
+        catch (error) {
             console.log("problem at deletePost :: ", error)
-        })
+        }
     }
 
     async uploadFile(file) {
@@ -85,14 +83,12 @@ class Service {
     }
 
     async deleteFile(fileId) {
-        let result = this.bucket.deleteFile(conf.bucketId, fileId)
-
-        result.then(function (response) {
-            console.log(response)
-            return response
-        }, (error) => {
+        try {
+            return await this.bucket.deleteFile(conf.bucketId, fileId);
+        }
+        catch (error) {
             console.log("problem at deleteFile :: ", error)
-        })
+        }
     }
 
     getPreview(fileId) {

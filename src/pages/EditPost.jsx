@@ -12,14 +12,16 @@ const EditPost = () => {
   useEffect(() => {
     service.getPost(slug).then((gotpost) => {
       if (gotpost) {
-        setPost(gotpost);
+        setPost({slug:slug , ...gotpost});
       } else {
         navigate("/");
       }
     });
   }, [slug, navigate]);
 
-
+  if (!post) {
+    return <p>Loading...</p>;
+  }
   return <div>
     <Container>
       <PostForm post={post} />

@@ -7,7 +7,7 @@ import { Query } from "appwrite";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.userData);
-  console.log(user);
+  // console.log(user);
 
   const [posts, setPosts] = useState(null);
   const [error, setError] = useState(null);
@@ -28,6 +28,7 @@ const Profile = () => {
         setError(error.message);
       });
   }, []);
+
   return (
     <div>
       {error && <p>{error}</p>}
@@ -45,7 +46,7 @@ const Profile = () => {
                 <Postcard {...post} />
               </div>
             ))}
-          {posts && posts.length === 0 && <p>Be the first to Post</p>}
+          {posts && posts.length === 0 && <p>Make your first Post</p>}
         </div>
       </Container>
     </div>

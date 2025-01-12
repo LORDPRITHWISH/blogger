@@ -8,14 +8,16 @@ import service from "../../appwrite/config";
 import Select from "../Select";
 import Button from "../Button";
 
-const PostForm = ({ post }) => {
+const PostForm = ( {post} ) => {
+  // console.log(post)
+  // console.log(post.logo)
   const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
     defaultValues: {
       title: post?.title || "",
       slug: post?.slug || "",
       content: post?.content || "",
       status: post?.status || "active",
-      image: post?.image || "",
+      image: post?.logo || "",
     },
   });
 
@@ -27,12 +29,12 @@ const PostForm = ({ post }) => {
     if (post) {
       const file = data.image[0] ? data.image[0] : null;
       if (file) {
-        service.deleteFile(post.featuredImage);
+        service.deleteFile(post.logo);
       }
 
       const dbPost = await service.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
+        logo: file ? file.$id : undefined,
       });
 
       if (dbPost) {
@@ -45,7 +47,7 @@ const PostForm = ({ post }) => {
       console.log("File:", file);
       if (file) {
         const fileID = file.$id;
-        data.featuredImage = fileID;
+        data.logo = fileID;
         const dbPost = await service.createPost({ ...data, userId: userData.$id });
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
@@ -75,11 +77,11 @@ const PostForm = ({ post }) => {
   return (
     <form onSubmit={handleSubmit(submit)} className="w-full flex flex-wrap">
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <Input label="title" placeholder="title" className="mb-4 bg-blue-950" {...register("title", { required: true })} />
+        <Input label="Title " placeholder="title" className="mb-4 bg-blue-950 rounded-md" {...register("title", { required: true })} />
         <Input
-          label="slug"
+          label="Slug"
           placeholder="slug"
-          className="mb-4 bg-blue-950"
+          className="mb-4 bg-blue-950 rounded-md"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.target.value), { shouldValidate: true });
@@ -88,16 +90,19 @@ const PostForm = ({ post }) => {
         <RTE label={"Content: "} name={"content"} control={control} defaultvalue={getValues("content")} />
       </div>
       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <Input label="Featured Image" type="file" className="mb-4" accept="image/png, image/jpg, image/jpeg" {...register("image", { required: !post })} />
+        <Input label="Featured Image" type="file" className="mb-4 ml-5  rounded-md" accept="image/png, image/jpg, image/jpeg" {...register("image", { required: !post })} />
         {post && (
           <div className="mb-4 bg-blue-950">
-            <img src={service.getPreview(post.featuredImage)} alt={post.title} className="w-full bg-blue-950" />
+            <img src={service.getPreview(post.logo)} alt={post.title} className="h-32  bg-blue-950 " />
           </div>
         )}
-        <Select option={["active", "inactive"]} labtxt="Status" className="mb-4 bg-blue-950" {...register("status", { required: true })} />
-        <Button type="submit" colour={post ? "bg-blue" : "bg-green"} className="text-white font-bold py-2 px-4 rounded-2xl border-gray-400 border-2">
-          {post ? "Update" : "Create"}
-        </Button>
+        <Select option={["active", "inactive"]} labtxt="Status" className="mb-4 bg-blue-950 p-2 rounded-md" {...register("status", { required: true })} />
+        <Button
+          name={post ? "Update" : "Create"}
+          type="submit"
+          colour={post ? "bg-blue" : "bg-green"}
+          className="text-white font-bold py-2 px-4 rounded-2xl border-gray-400 border-2 mt-4"
+        />
       </div>
     </form>
   );

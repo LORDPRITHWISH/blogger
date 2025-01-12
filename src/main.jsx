@@ -87,14 +87,6 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/edit/:slug",
-        element: (
-          <Authenticator authentication={true}>
-            <EditPost />
-          </Authenticator>
-        ),
-      },
-      {
         path: "profile",
         element: (
           <Authenticator authentication={true}>
