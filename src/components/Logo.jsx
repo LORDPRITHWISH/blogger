@@ -6,7 +6,7 @@ const Logo = ({ size = 14, className, padd = "p-1" }) => {
 
   return (
     <div className={`${padd} ${className} bg-zinc-900`}>
-      <img className={` ${imsiz} ${className}`} src="src/assets/logo.png" />
+      <img className={` ${imsiz} ${className}`} src="/src/assets/logo.png" />
     </div>
   );
 };
