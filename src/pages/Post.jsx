@@ -25,7 +25,7 @@ const Post = () => {
   };
 
   React.useEffect(() => {
-    isAuther.current = post?.UserId === userdata.$id;
+    isAuther.current = post?.UserId === userdata?.$id;
     // console.log(isAuther);
     // console.log(`${isAuther},${post?.UserId}, ${userdata?.$id}`);
   }, [post, userdata]);

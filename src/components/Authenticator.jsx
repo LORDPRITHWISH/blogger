@@ -1,35 +1,37 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import React from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router";
 
-const Authenticator = ({children,authentication=true}) => {
+const Authenticator = ({ children, authentication = true }) => {
+  console.log(useLocation().pathname);
+  const location = useLocation().pathname;
 
-  // if(authentication){
+  const logging = useSelector((state) => state.auth.loaded);
+  // if (logging) {
+  const logstate = useSelector((state) => state.auth.status);
 
-    const logstate = useSelector(state => state.auth.status)
-    
-    const navigate = useNavigate()
-    
-    const [loading, setLoading] = React.useState(true)
+  const navigate = useNavigate();
 
-    React.useEffect(()=>{
-      if(authentication && !logstate){
-        navigate('/login')
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    console.log(logging);
+    if (logging) {
+      if (authentication && !logstate) {
+        navigate(`/login?loc=${location}`);
+      } else if (!authentication && logstate) {
+        navigate("/");
       }
-      else if(!authentication && logstate){
-        navigate('/')
-      }
-      setLoading(false)
-    },[logstate,authentication,navigate])
-    
-    
+      setLoading(false);
+    }
+  }, [logstate, authentication, navigate, location, logging]);
+
   // }
 
-  return loading?null:(
-    <div>
-        {children}
-    </div>
-  )
-}
+  return loading ? null : <div>{children}</div>;
+  // } else {
+  //   return null;
+  // }
+};
 
-export default Authenticator
+export default Authenticator;

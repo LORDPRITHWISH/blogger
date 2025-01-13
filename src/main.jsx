@@ -10,12 +10,12 @@ import Login from "./pages/Login.jsx";
 import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Post from "./pages/Post.jsx";
-import EditPosts from "./pages/EditPost.jsx";
 import Logout from "./pages/Logout.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import Profile from "./pages/Profile.jsx";
 import AllPost from "./pages/AllPost.jsx";
 import EditPost from "./pages/EditPost.jsx";
+import Test from "./pages/Test.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/login/:slug",
+        element: (
+          <Authenticator authentication={false}>
+            <Login />
+          </Authenticator>
+        ),
       },
       {
         path: "/login",
@@ -58,7 +66,7 @@ const router = createBrowserRouter([
         path: "/edit_po/:slug",
         element: (
           <Authenticator authentication={true}>
-            <EditPosts />
+            <EditPost />
           </Authenticator>
         ),
       },
@@ -93,6 +101,14 @@ const router = createBrowserRouter([
             <Profile />
           </Authenticator>
         ),
+      },
+      {
+        path: "test/:slug",
+        element: <Test />,
+      },
+      {
+        path: "test",
+        element: <Test />,
       },
     ],
   },
